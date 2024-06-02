@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize-typescript"
+import ProductModel from "../db/sequelize/model/product.model";
 
 describe("Product repository test", () => {
     let sequileze: Sequelize;
@@ -10,9 +11,11 @@ describe("Product repository test", () => {
             logging: false, //nao precisa logar
             sync: { force: true } // para criar as tabelas
         });
+        sequileze.addModels([ProductModel])
+        await sequileze.sync();
+    });
 
-        afterEach(async () => {
-            await sequileze.close();
-        });
+    afterEach(async () => {
+        await sequileze.close();
     });
 });
