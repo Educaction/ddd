@@ -1,10 +1,19 @@
 {
     "wca.contextAwareness.fileLevel": true,
-    "wca.enable": false,
     "testing.coverageBarThresholds": {
         
         "red": 0,
         "yellow": 60,
         "green": 90
+    },
+
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        // "fc-ddd-patterns":true
     }
 }
