@@ -14,23 +14,23 @@ export default class Customer {
   }
 
   get id(): string {
-    return this._id
+    return this._id;
   }
+
   get name(): string {
-    return this._name
+    return this._name;
   }
 
   get rewardPoints(): number {
-    return this._rewardPoints
+    return this._rewardPoints;
   }
 
   validate() {
-    if (this._name.length === 0) {
-      throw new Error("Name is required");
-
-    }
     if (this._id.length === 0) {
       throw new Error("Id is required");
+    }
+    if (this._name.length === 0) {
+      throw new Error("Name is required");
     }
   }
 
@@ -39,8 +39,16 @@ export default class Customer {
     this.validate();
   }
 
-  isActivate(): boolean {
-    return this._active
+  get Address(): Address {
+    return this._address;
+  }
+  
+  changeAddress(address: Address) {
+    this._address = address;
+  }
+
+  isActive(): boolean {
+    return this._active;
   }
 
   activate() {
@@ -55,11 +63,10 @@ export default class Customer {
   }
 
   addRewardPoints(points: number) {
-    this._rewardPoints += points
+    this._rewardPoints += points;
   }
 
   set Address(address: Address) {
     this._address = address;
   }
-
 }

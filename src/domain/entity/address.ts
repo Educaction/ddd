@@ -21,10 +21,10 @@ export default class Address {
         }
         if (this._zip.length === 0) {
             throw new Error("Zip is required.");
-        } 
+        }
         if (this._city.length === 0) {
             throw new Error("City is required.");
-        }                  
+        }
     }
 
     toString() {
@@ -62,7 +62,3 @@ export default class Address {
         this._city = city;
     }
 }
-
-// Example usage:
-const address = new Address("Main St", 123, "12345", "Anytown");
-console.log(address);
