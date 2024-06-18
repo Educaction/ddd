@@ -1,15 +1,17 @@
-import { Sequelize } from "sequelize-typescript";
-import OrderModel from "../db/sequelize/model/order.model";
-import OrderItemModel from "../db/sequelize/model/order-item.model";
-import ProductModel from "../db/sequelize/model/product.model";
-import CustomerRepository from "./customer.repository";
-import Customer from "../../domain/entity/customer";
-import Address from "../../domain/entity/address";
-import ProductRepository from "./product.repository";
-import Product from "../../domain/entity/product";
-import OrderItem from "../../domain/entity/order_item";
-import Order from "../../domain/entity/order";
-import CustomerModel from "../db/sequelize/model/customer.model";
+import { Sequelize } from 'sequelize-typescript';
+
+import Address from '../../domain/entity/address';
+import Customer from '../../domain/entity/customer';
+import Order from '../../domain/entity/order';
+import OrderItem from '../../domain/entity/order_item';
+import Product from '../../domain/entity/product';
+import CustomerModel from '../db/sequelize/model/customer.model';
+import OrderItemModel from '../db/sequelize/model/order-item.model';
+import OrderModel from '../db/sequelize/model/order.model';
+import ProductModel from '../db/sequelize/model/product.model';
+import CustomerRepository from './customer.repository';
+import OrderRepository from './order.repository';
+import ProductRepository from './product.repository';
 
 describe("Order repository test", () => {
   let sequelize: Sequelize;
@@ -54,8 +56,8 @@ describe("Order repository test", () => {
     const orderRepository = new OrderRepository();
     await orderRepository.create(order);
 
-    const orderModel = await OrderModel.findOne({ 
-      where: { id: order.id } ,
+    const orderModel = await OrderModel.findOne({
+      where: { id: order.id },
       include: ["items"],
     });
 
@@ -68,11 +70,13 @@ describe("Order repository test", () => {
           id: orderItem.id,
           name: orderItem.name,
           price: orderItem.price,
+          product_id: "123",
+          quantity: 2,
           order_id: "123",
         },
       ]
     });
 
   });
- 
+
 });
