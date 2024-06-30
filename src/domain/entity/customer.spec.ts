@@ -36,7 +36,7 @@ describe("Customer unit tests", () => {
 
             customer.activate();
 
-            expect(customer.isActivate()).toBe(true);
+            expect(customer.isActive()).toBe(true);
         });
     });
     it("should change deactivate", () => {
@@ -44,7 +44,7 @@ describe("Customer unit tests", () => {
 
             const customer = new Customer("1", "Csutomer 1");
             customer.deactivate();
-            expect(customer.isActivate()).toBe(false);
+            expect(customer.isActive()).toBe(false);
         });
     }); 
     it("should throw error when address is undefined", () => {
