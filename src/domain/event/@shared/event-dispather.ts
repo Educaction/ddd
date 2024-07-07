@@ -10,15 +10,15 @@ export default class EventDispatcher implements EventDispatcherInterface {
         return this.eventHandlers;
     }
 
-    register(eventName: string, eventHandler: EventHandlerInterface): void { 
-        if(!this.eventHandlers[eventName]) {
+    register(eventName: string, eventHandler: EventHandlerInterface): void {
+        if (!this.eventHandlers[eventName]) {
             this.eventHandlers[eventName] = [];
         }
         this.eventHandlers[eventName].push(eventHandler);
     }
 
-    unregister(eventName: string, eventHandler: EventHandlerInterface): void { 
-        if(this.eventHandlers[eventName]) {
+    unregister(eventName: string, eventHandler: EventHandlerInterface): void {
+        if (this.eventHandlers[eventName]) {
             const index = this.eventHandlers[eventName].indexOf(eventHandler);
             if (index !== -1) {
                 this.eventHandlers[eventName].splice(index, 1);
@@ -28,8 +28,16 @@ export default class EventDispatcher implements EventDispatcherInterface {
 
     unregisterAll(): void {
         this.eventHandlers = {};
-     }
+    }
 
-    notify(event: EventInterface): void { }
+    notify(event: EventInterface): void {
+
+        const eventName = event.constructor.name;
+        if (this.eventHandlers[eventName]) {
+            this.eventHandlers[eventName].forEach((eventHandlers) => {
+                eventHandlers.handle(event);
+            });
+        }
+    }
 
 }
