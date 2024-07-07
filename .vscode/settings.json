@@ -1,5 +1,5 @@
 {
-    "wca.contextAwareness.fileLevel": true,
+    // "wca.contextAwareness.fileLevel": true,
     "testing.coverageBarThresholds": {
         
         "red": 0,
