@@ -1,14 +1,17 @@
+import EventDispatcher from "./event-dispather";
+import SendEmailWhenProductIsCreatedHandler from "./product/handler/send-email-when-product-is-created.handler";
+
 describe("Domain events test", () => {
 
     it("should registere an envetn handler", () => {
 
         const eventDispacher = new EventDispatcher();
-        const envetHandler = new SendEmailProductIsCreatedHanlder();
+        const envetHandler = new SendEmailWhenProductIsCreatedHandler();
 
         eventDispacher.register("ProductCreatedEvent", envetHandler);
 
-        expect(eventDispacher.geEventHandler["ProductCreatedEvent"]).toBeDefined();
-        expect(eventDispacher.geEventHandler["ProductCreatedEvent"].lenght).toBe(1);
+        expect(eventDispacher.getEventHandlers["ProductCreatedEvent"]).toBeDefined();
+        expect(eventDispacher.getEventHandlers["ProductCreatedEvent"].length).toBe(1);
 
 
     });
