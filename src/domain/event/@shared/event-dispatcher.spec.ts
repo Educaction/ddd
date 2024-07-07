@@ -3,7 +3,7 @@ import SendEmailWhenProductIsCreatedHandler from "./product/handler/send-email-w
 
 describe("Domain events test", () => {
 
-    it("should registere an envetn handler", () => {
+    it("should register an event handler", () => {
 
         const eventDispacher = new EventDispatcher();
         const envetHandler = new SendEmailWhenProductIsCreatedHandler();
@@ -12,7 +12,40 @@ describe("Domain events test", () => {
 
         expect(eventDispacher.getEventHandlers["ProductCreatedEvent"]).toBeDefined();
         expect(eventDispacher.getEventHandlers["ProductCreatedEvent"].length).toBe(1);
+        expect(eventDispacher.getEventHandlers["ProductCreatedEvent"][0]).toMatchObject(envetHandler);
 
 
+    });
+
+    it("should unregister an event handler", () => {
+        const eventDispacher = new EventDispatcher();
+        const envetHandler = new SendEmailWhenProductIsCreatedHandler();
+
+        eventDispacher.register("ProductCreatedEvent", envetHandler);
+
+        expect(eventDispacher.getEventHandlers["ProductCreatedEvent"][0]).toMatchObject(envetHandler);
+
+        eventDispacher.unregister("ProductCreatedEvent", envetHandler);
+
+        expect(
+            eventDispacher.getEventHandlers["ProductCreatedEvent"]
+        ).toBeDefined();
+        expect(eventDispacher.getEventHandlers["ProductCreatedEvent"].length).toBe(0);
+
+    });
+
+    it("should unregister all event handlers", () => {
+        const eventDispacher = new EventDispatcher();
+        const envetHandler = new SendEmailWhenProductIsCreatedHandler();
+
+        eventDispacher.register("ProductCreatedEvent", envetHandler);
+
+        expect(eventDispacher.getEventHandlers["ProductCreatedEvent"][0]).toMatchObject(envetHandler);
+
+        eventDispacher.unregisterAll();
+
+        expect(
+            eventDispacher.getEventHandlers["ProductCreatedEvent"]
+        ).toBeUndefined();
     });
 })
