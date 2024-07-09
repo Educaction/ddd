@@ -1,33 +1,13 @@
-import { Sequelize } from 'sequelize-typescript';
-
-import CustomerRepository from "../../../infrastructure/repository/customer.repository";
 import EventDispatcher from "../../@shared/event/event-dispather";
 import Customer from "../entity/customer";
 import Address from "../value-object/address";
 import CustomerCreatedEvent from "./customer-created.event";
 import EnviaConsoleLog1Handler from "./handler/EnviaConsoleLog1Handler";
-import CustomerModel from "../../../infrastructure/db/sequelize/model/customer.model";
 import EnviaConsoleLog2Handler from './handler/EnviaConsoleLog2Handler';
 import EnviaConsoleLogHandler from './handler/EnviaConsoleLogHandler';
 
 describe("Domain events customer test", () => {
-    let sequelize: Sequelize;
 
-    beforeEach(async () => {
-      sequelize = new Sequelize({
-        dialect: "sqlite",
-        storage: ":memory:",
-        logging: false,
-        sync: { force: true },
-      });
-  
-      sequelize.addModels([CustomerModel]);
-      await sequelize.sync();
-    });
-  
-    afterEach(async () => {
-      await sequelize.close();
-    });
     it("should register an event handler", () => {
 
         const eventDispacher = new EventDispatcher();
@@ -97,11 +77,9 @@ describe("Domain events customer test", () => {
         eventDispacher.register("CustomerCreatedEvent", envetHandler2);
         expect(eventDispacher.getEventHandlers["CustomerCreatedEvent"][1]).toMatchObject(envetHandler2);
 
-        const customerRepository = new CustomerRepository();
         const customer = new Customer("123", "Customer1");
         const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
         customer.Address = address;
-        await customerRepository.create(customer);
         const customerCreatedEvent = new CustomerCreatedEvent({
             id: customer.id,
             name: customer.name,
@@ -123,13 +101,10 @@ describe("Domain events customer test", () => {
         eventDispacher.register("CustomerCreatedEvent", eventHandler);
         expect(eventDispacher.getEventHandlers["CustomerCreatedEvent"][0]).toMatchObject(eventHandler);
 
-
-        const customerRepository = new CustomerRepository();
         const customer = new Customer("123", "Customer1");
         const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
         customer.changeAddress(address);
 
-        await customerRepository.create(customer);
         const customerCreatedEvent = new CustomerCreatedEvent({
             id: customer.id,
             name: customer.name,
