@@ -2,7 +2,6 @@ import Address from '../value-object/address';
 import CustomerFactory from './customer.factory';
 
 describe("Customer factory unit test", () => {
-
     it("should create a customer", () => {
         let customer = CustomerFactory.create("John");
         expect(customer.id).toBeDefined();
@@ -17,5 +16,4 @@ describe("Customer factory unit test", () => {
         expect(customer.name).toBe("John");
         expect(customer.Address).toBe(address);
     });
-
 })
