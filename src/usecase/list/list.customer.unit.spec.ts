@@ -1,5 +1,6 @@
 import CustomerFactory from "../../domain/customer/factory/customer.factory";
 import Address from "../../domain/customer/value-object/address";
+import ListCustomerUseCase from "./list.customer.usercase";
 
 const customer1 = CustomerFactory.createWithAddress(
   "John Doe",
@@ -11,6 +12,7 @@ const customer2 = CustomerFactory.createWithAddress(
   new Address("Street 2", 2, "123456", "City 2")
 );
 
+// findAll - list.customer.usercase.ts | const customers = await this.customerRepository.findAll();
 const MockRepository = () => {
   return {
     create: jest.fn(),
