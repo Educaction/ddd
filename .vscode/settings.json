@@ -6,6 +6,8 @@
         "yellow": 60,
         "green": 90
     },
+    "editor.guides.bracketPairs": true,
+    "editor.guides.highlightActiveIndentation": true,    
     "editor.detectIndentation": false,
     "editor.insertSpaces": true,
     "editor.tabSize": 2,
