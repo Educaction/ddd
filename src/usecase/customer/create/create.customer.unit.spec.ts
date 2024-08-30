@@ -1,10 +1,12 @@
+import CreateCustomerUseCase from "./create.customer.usercase";
+
 const input = {
   name: "John",
   address: {
     street: "Street",
-    city: "City",
     number: 123,
     zip: "Zip",
+    city: "City",
   },
 };
 
@@ -20,19 +22,20 @@ const MockRepository = () => {
 describe("unit test create customer user case", () => {
   it("should create a customer", async () => {
     const customerRepository = MockRepository();
-    const customerCreateUseCase = new CustomerCreateUseCase(customerRepository);
+    const customerCreateUseCase = new CreateCustomerUseCase(customerRepository);
 
-    const output = await customerCreateUseCase(input);
+    const output = await customerCreateUseCase.execute(input);
 
     expect(output).toEqual({
       id: expect.any(String),
       name: input.name,
       address: {
-        name: input.address.number,
+        street: input.address.street,
+        number: input.address.number,
         zip: input.address.zip,
-        city: input.address.city
+        city: input.address.city,
       },
     });
+  });
 
-  })
 });
