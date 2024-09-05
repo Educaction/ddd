@@ -19,4 +19,8 @@ export default class ProductFactory {
         
     }
 
+    public static createNewProduct(name: string, price: number): Product {
+      return new Product(uuid(), name, price);
+  }    
+
 }
