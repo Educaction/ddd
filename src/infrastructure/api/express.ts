@@ -5,7 +5,7 @@ import CustomerModel from "../customer/repository/sequelize/customer.model";
 export const app: Express = express();
 app.use(express.json());
 
-export let sequelize: Sequelize
+export let sequelize: Sequelize;
 
 async function setupDb() {
   sequelize = new Sequelize({
@@ -16,4 +16,4 @@ async function setupDb() {
   await sequelize.addModels([CustomerModel]);
   await sequelize.sync();
 }
-setupDb()
+setupDb();
