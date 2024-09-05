@@ -3,10 +3,10 @@ import request from "supertest";
 
 describe("E2E test for customer", () => {
   beforeEach(async () => {
-    sequelize.sync({ force: true });
+    await sequelize.sync({ force: true });
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     await sequelize.close();
   });
 
@@ -19,15 +19,15 @@ describe("E2E test for customer", () => {
           street: "Street",
           city: "City",
           number: 123,
-          zip: "12345"
-        }
+          zip: "12345",
+        },
       });
 
     expect(response.status).toBe(200);
-    expect(response.body.name).toEqual("John");
-    expect(response.body.address.street).toBe("Street")
-    expect(response.body.address.city).toBe("City")
-    expect(response.body.address.number).toBe(123)
-    expect(response.body.address.zip).toBe("12345")
+    expect(response.body.name).toBe("John");
+    expect(response.body.address.street).toBe("Street");
+    expect(response.body.address.city).toBe("City");
+    expect(response.body.address.number).toBe(123);
+    expect(response.body.address.zip).toBe("12345");
   });
 });
