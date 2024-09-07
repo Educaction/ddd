@@ -5,11 +5,15 @@ export type NotificationError = {
   context: string;
 }
 
-export default class Notificaiton {
+export default class Notification {
   private errors: NotificationError[] = [];
 
   addError(error: NotificationError) {
     this.errors.push(error)
+  }
+
+  hasErrors(): boolean {
+    return this.errors.length > 0;
   }
 
   messages(context?: string): string {
