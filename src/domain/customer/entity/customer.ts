@@ -10,7 +10,7 @@ export default class Customer extends Entity {
 
   constructor(id: string, name: string) {
     super();
-    this.id = id;
+    this._id = id;
     this._name = name;
     this.validate();
 
@@ -28,7 +28,7 @@ export default class Customer extends Entity {
   }
 
   validate() {
-    if (this.id.length === 0) {
+    if (this._id.length === 0) {
       this.notification.addError({
         context: "customer",
         message: "Id is required",
