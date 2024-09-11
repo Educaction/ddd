@@ -12,7 +12,7 @@ export default class CustomerPresenter {
     };
 
     return toXML({
-      customer: {
+      customers: {
         customer: data.customers.map((customer) => ({
           id: customer.id,
           name: customer.name,
